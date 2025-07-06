@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Twitter
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="display-4 text-center">Welcome to Twitter in Django</h1> 
+
+    <a href="{% url 'tweet_create' %}" class="btn btn-primary">Create Tweet</a>
+
+    <div class="tweets-container">
+      {% for tweet in tweets %}
+        <div class="tweet-card">
+          <!-- Card Header -->
+          <div class="tweet-header">
+            <div class="user-info">
+              <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+              </div>
+              <div class="user-details">
+                <h6 class="username">{{ tweet.user.username }}</h6>
+                <span class="tweet-time">{{ tweet.created_at|timesince }} ago</span>
+              </div>
+            </div>
+            {% if tweet.user == user %}
+              <div class="tweet-actions-menu">
+                <i class="fas fa-ellipsis-h"></i>
+                <div class="actions-dropdown">
+                  <a href="{% url 'tweet_edit' tweet.id %}" class="action-item edit-action">
+                    <i class="fas fa-edit"></i> Edit
+                  </a>
+                  <a href="{% url 'tweet_delete' tweet.id %}" class="action-item delete-action">
+                    <i class="fas fa-trash"></i> Delete
+                  </a>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Tweet Content -->
+          <div class="tweet-content">
+            <p class="tweet-text">{{ tweet.text }}</p>
+            {% if tweet.photo %}
+              <div class="tweet-image-container">
+                <img src="{{ tweet.photo.url }}" class="tweet-image" alt="Tweet image">
+              </div>
+            {% endif %}
+          </div>
+
+          <!-- Card Footer -->
+          <div class="tweet-footer">
+            <div class="tweet-stats">
+              <div class="stat-item">
+                <i class="far fa-heart"></i>
+                <span>0</span>
+              </div>
+              <div class="stat-item">
+                <i class="far fa-comment"></i>
+                <span>0</span>
+              </div>
+              <div class="stat-item">
+                <i class="fas fa-retweet"></i>
+                <span>0</span>
+              </div>
+              <div class="stat-item">
+                <i class="far fa-share-square"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="no-tweets">
+          <i class="fas fa-feather-alt"></i>
+          <h3>No tweets yet</h3>
+          <p>Be the first to share something!</p>
+          <a href="{% url 'tweet_create' %}" class="btn btn-primary">
+            <i class="fas fa-plus me-1"></i>Create Your First Tweet
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+{% endblock %}

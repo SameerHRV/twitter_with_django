@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Twitter
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="display-4 text-center">Welcome to Twitter in Django</h1>
+
+    <h2>
+      <h2>Login to your account</h2>
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-warning" type="submit">Submit</button>
+      </form>
+    </h2>
+
+    <a href="{% url 'register' %}">
+      Don't have an account? Register here
+    </a>
+{% endblock %}
