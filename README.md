@@ -91,3 +91,7 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ---
 
 Built for educational purposes and Django experimentation.
+
+-> Author
+[Sameer Harapanahalli] – [sameerhrv@gmail.com]  
+GitHub: [SameerHRV](https://github.com/SameerHRV)
